@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -15,8 +15,16 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Review from "./Review";
+import Profile from "./Profile";
+import Store from "./Store";
 
 const Home = () => {
+  const [tab, setTab] = useState("review");
+
+  const changeTab = (selectedTab) => {
+    setTab(selectedTab);
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, marginHorizontal: 10 }}>
       <StatusBar style="auto" />
@@ -66,55 +74,72 @@ const Home = () => {
           paddingVertical: 20,
         }}
       >
-        <TouchableOpacity>
-          <Text style={{ color: "#000", fontWeight: 900, fontSize: hp(2) }}>
+        <TouchableOpacity onPress={() => changeTab("profile")}>
+          <Text style={[styles.tabText, tab === "profile" && styles.activeTab]}>
             Profile
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={{ color: "#000", fontWeight: 900, fontSize: hp(2) }}>
+        <TouchableOpacity onPress={() => changeTab("store")}>
+          <Text style={[styles.tabText, tab === "store" && styles.activeTab]}>
             Store
           </Text>
         </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Text style={{ color: "#000", fontWeight: 900, fontSize: hp(2) }}>
+        <TouchableOpacity onPress={() => changeTab("review")}>
+          <Text style={[styles.tabText, tab === "review" && styles.activeTab]}>
             Reviews
           </Text>
         </TouchableOpacity>
       </View>
 
-      <ScrollView
-        style={{ marginBottom: 10 }}
-        showsVerticalScrollIndicator={false}
-      >
+      <View style={styles.tabIndicator}>
         <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 10,
-          }}
+          style={[
+            styles.indicatorLine,
+            {
+              left:
+                tab === "profile" ? 0 : tab === "store" ? wp("33%") : wp("66%"),
+            },
+          ]}
+        />
+      </View>
+
+      {tab === "profile" && <Profile />}
+      {tab === "store" && <Store />}
+      {tab === "review" && (
+        <ScrollView
+          style={{ marginBottom: 10 }}
+          showsVerticalScrollIndicator={false}
         >
-          <Text style={{ color: "#000", fontWeight: "700", fontSize: hp(2.5) }}>
-            Reviews
-          </Text>
-          <TouchableOpacity>
-            <Text style={{ color: "#F03950", fontWeight: "700" }}>See All</Text>
-          </TouchableOpacity>
-        </View>
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-      </ScrollView>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: 10,
+            }}
+          >
+            <Text
+              style={{ color: "#000", fontWeight: "700", fontSize: hp(2.5) }}
+            >
+              Reviews
+            </Text>
+            <TouchableOpacity>
+              <Text style={{ color: "#F03950", fontWeight: "700" }}>
+                See All
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Review />
+          <Review />
+          <Review />
+          <Review />
+          <Review />
+          <Review />
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
   container: {
@@ -122,4 +147,26 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  tabText: {
+    color: "#000",
+    fontWeight: 900,
+    fontSize: hp(2),
+  },
+  activeTab: {
+    color: "#F03950",
+  },
+  tabIndicator: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    position: "relative",
+  },
+  indicatorLine: {
+    height: 2,
+    width: wp("30%"),
+    backgroundColor: "#F03950",
+    position: "absolute",
+    bottom: 0,
+  },
 });
+
+export default Home;
