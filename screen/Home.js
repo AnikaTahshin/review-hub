@@ -240,7 +240,9 @@ const Home = () => {
                     </View>
                   </View>
                   <View>
-                    <Text style={{ textAlign: "justify" }}>{item.text}</Text>
+                    <Text style={{ textAlign: "justify", lineHeight: 20 }}>
+                      {item.text}
+                    </Text>
                   </View>
                 </View>
               </>

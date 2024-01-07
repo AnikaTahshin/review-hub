@@ -3,7 +3,7 @@ import React from "react";
 
 const Store = () => {
   return (
-    <View>
+    <View style={{ paddingHorizontal: 10 }}>
       <Text>Store</Text>
     </View>
   );
