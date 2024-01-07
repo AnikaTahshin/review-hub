@@ -19,7 +19,45 @@ import Profile from "./Profile";
 import Store from "./Store";
 
 const Home = () => {
+  const dataArr = [
+    {
+      id: 1,
+      name: "Darrell Steward",
+      img: require("../assets/1.jpg"),
+      date: "12 Apr",
+      text: "I could not be happier with my results. I have gotten both my lips and done at Pura Vida and this is the best they’ve looked in the 10+ years of me getting filler. I’ve had a great experience with Pura Vida and have gotten honest answers to all my questions.",
+    },
+    {
+      id: 2,
+      name: "Jenny Wilson",
+      img: require("../assets/2.jpg"),
+      date: "21 May",
+      text: "Quick service & very trustworthy. Worked with Tom Nolan on a quick fix on my mirror. He was very knowledgeable about potential issues before getting into it & was able to get it fixed very quickly. I would trust them with any future repairs, I would not take my car anywhere else.”",
+    },
+    {
+      id: 3,
+      name: "John Doe",
+      img: require("../assets/3.jpeg"),
+      date: "13 May",
+      text: "Took care of my insurance needs. Looked for the best rates. Best insurance agent by far. Honest and trustworthy. Thank you Gil. We appreciate your hard work! Highly recommend!”",
+    },
+    {
+      id: 4,
+      name: "Robert Bros",
+      img: require("../assets/4.jpeg"),
+      date: "11 May",
+      text: "Amazing car buying experience! Shopped around 3 different dealers and Power Ford had by far the most friendly staff and comfortable show room. The sales team was fantastic as well as the finance manager. From start to finish everything was beyond expectation.",
+    },
+    {
+      id: 5,
+      name: "Alexa D",
+      img: require("../assets/5.jpeg"),
+      date: "5 May",
+      text: "This place is great! They have a huge selection of all kinds of instruments, a beautiful show room, and the most friendly staff I’ve encountered in a long time. I got a better deal than I was in expecting on an electric piano. I’ll definitely be back!",
+    },
+  ];
   const [tab, setTab] = useState("review");
+  const [data, setData] = useState(dataArr);
 
   const changeTab = (selectedTab) => {
     setTab(selectedTab);
@@ -97,7 +135,7 @@ const Home = () => {
             styles.indicatorLine,
             {
               left:
-                tab === "profile" ? 0 : tab === "store" ? wp("33%") : wp("66%"),
+                tab === "profile" ? 0 : tab === "store" ? wp("35%") : wp("70%"),
             },
           ]}
         />
@@ -129,12 +167,17 @@ const Home = () => {
               </Text>
             </TouchableOpacity>
           </View>
+          {data.map((item, index) => (
+            <View key={item.id}>
+              <Review data={item} />
+            </View>
+          ))}
+          {/* <Review />
           <Review />
           <Review />
           <Review />
           <Review />
-          <Review />
-          <Review />
+          <Review /> */}
         </ScrollView>
       )}
     </SafeAreaView>
@@ -151,6 +194,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: 900,
     fontSize: hp(2),
+    textAlign: "center",
   },
   activeTab: {
     color: "#F03950",
@@ -159,9 +203,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     position: "relative",
+    backgroundColor: "#eee",
+    height: hp(1.2),
+    width: wp("100%"),
   },
   indicatorLine: {
-    height: 2,
+    height: hp(1.2),
     width: wp("30%"),
     backgroundColor: "#F03950",
     position: "absolute",

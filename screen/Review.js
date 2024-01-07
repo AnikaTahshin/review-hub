@@ -6,19 +6,19 @@ import {
 } from "react-native-responsive-screen";
 
 import Icon from "react-native-vector-icons/FontAwesome";
-const Review = () => {
+const Review = (props) => {
   return (
     <>
       <View style={{ flex: 1, padding: 10 }}>
         <View style={[styles.container, { paddingVertical: 10 }]}>
           <View style={styles.container}>
-            <Image source={require("../assets/1.jpg")} style={styles.image} />
+            <Image source={props.data.img} style={styles.image} />
 
             <View>
               <Text
                 style={{ color: "#000", fontSize: hp("2%"), fontWeight: 700 }}
               >
-                Jhon
+                {props.data.name}
               </Text>
               <View
                 style={{
@@ -64,17 +64,12 @@ const Review = () => {
             <Text
               style={{ color: "#000", fontSize: hp("2%"), fontWeight: 400 }}
             >
-              12 Apr
+              {props.data.date}
             </Text>
           </View>
         </View>
         <View>
-          <Text style={{ textAlign: "justify" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
-            odio animi corporis numquam qui delectus at nisi. Expedita
-            voluptates error, iusto blanditiis reprehenderit vero maiores ipsum.
-            Eum amet tempore perferendis?
-          </Text>
+          <Text style={{ textAlign: "justify" }}>{props.data.text}</Text>
         </View>
       </View>
     </>

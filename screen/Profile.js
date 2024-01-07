@@ -3,7 +3,7 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <View>
+    <View style={{ paddingHorizontal: 10 }}>
       <Text>Profile</Text>
     </View>
   );
