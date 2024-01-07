@@ -94,12 +94,19 @@ const Home = () => {
         </View>
         <TouchableOpacity
           style={{
-            padding: 10,
+            paddingVertical: 10,
             backgroundColor: "#F03950",
             borderRadius: 30,
+            paddingHorizontal: 20,
           }}
         >
-          <Text style={{ color: "#fff", fontSize: hp("2%"), fontWeight: 700 }}>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: hp("2%"),
+              fontWeight: 700,
+            }}
+          >
             Follow
           </Text>
         </TouchableOpacity>
