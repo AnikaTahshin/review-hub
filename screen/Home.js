@@ -3,7 +3,6 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -16,7 +15,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import Review from "./Review";
+
 import Profile from "./Profile";
 import Store from "./Store";
 
@@ -106,6 +105,8 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
+      {/* Tab text */}
+
       <View
         style={{
           flexDirection: "row",
@@ -131,13 +132,15 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
+      {/* Active tab indicator */}
+
       <View style={styles.tabIndicator}>
         <View
           style={[
             styles.indicatorLine,
             {
               left:
-                tab === "profile" ? 0 : tab === "store" ? wp("35%") : wp("70%"),
+                tab === "profile" ? 0 : tab === "store" ? wp("35%") : wp("65%"),
             },
           ]}
         />
@@ -166,6 +169,8 @@ const Home = () => {
               </Text>
             </TouchableOpacity>
           </View>
+
+          {/* All Data render */}
           <FlatList
             data={data}
             keyExtractor={(item) => item.id}
@@ -277,10 +282,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
     height: hp(1.2),
     width: wp("100%"),
+    marginLeft: -10,
   },
   indicatorLine: {
     height: hp(1.2),
-    width: wp("30%"),
+    width: wp("35%"),
     backgroundColor: "#F03950",
     position: "absolute",
     bottom: 0,
