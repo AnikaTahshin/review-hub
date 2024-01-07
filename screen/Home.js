@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {
+  FlatList,
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -144,10 +146,7 @@ const Home = () => {
       {tab === "profile" && <Profile />}
       {tab === "store" && <Store />}
       {tab === "review" && (
-        <ScrollView
-          style={{ marginBottom: 10 }}
-          showsVerticalScrollIndicator={false}
-        >
+        <>
           <View
             style={{
               flexDirection: "row",
@@ -167,18 +166,88 @@ const Home = () => {
               </Text>
             </TouchableOpacity>
           </View>
-          {data.map((item, index) => (
-            <View key={item.id}>
-              <Review data={item} />
-            </View>
-          ))}
-          {/* <Review />
-          <Review />
-          <Review />
-          <Review />
-          <Review />
-          <Review /> */}
-        </ScrollView>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <>
+                <View style={{ flex: 1, padding: 10 }}>
+                  <View style={[styles.container, { paddingVertical: 10 }]}>
+                    <View style={styles.container}>
+                      <Image source={item.img} style={styles.image} />
+
+                      <View>
+                        <Text
+                          style={{
+                            color: "#000",
+                            fontSize: hp("2%"),
+                            fontWeight: 700,
+                          }}
+                        >
+                          {item.name}
+                        </Text>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            paddingVertical: 8,
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Icon
+                            name="star"
+                            style={{ marginRight: 5 }}
+                            size={15}
+                            color="#FFB316"
+                          />
+                          <Icon
+                            name="star"
+                            style={{ marginRight: 5 }}
+                            size={15}
+                            color="#FFB316"
+                          />
+                          <Icon
+                            name="star"
+                            style={{ marginRight: 5 }}
+                            size={15}
+                            color="#FFB316"
+                          />
+                          <Icon
+                            name="star"
+                            style={{ marginRight: 5 }}
+                            size={15}
+                            color="#FFB316"
+                          />
+                          <Icon
+                            name="star-o"
+                            style={{ marginRight: 5 }}
+                            size={15}
+                            color="#eee"
+                          />
+                        </View>
+                      </View>
+                    </View>
+                    <View>
+                      <Text
+                        style={{
+                          color: "#000",
+                          fontSize: hp("2%"),
+                          fontWeight: 400,
+                          marginRight: 15,
+                        }}
+                      >
+                        {item.date}
+                      </Text>
+                    </View>
+                  </View>
+                  <View>
+                    <Text style={{ textAlign: "justify" }}>{item.text}</Text>
+                  </View>
+                </View>
+              </>
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        </>
       )}
     </SafeAreaView>
   );
@@ -213,6 +282,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#F03950",
     position: "absolute",
     bottom: 0,
+  },
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    marginRight: 10,
+    resizeMode: "contain",
   },
 });
 
